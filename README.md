@@ -55,6 +55,3 @@ done
 ```
 
 Use new or empty output directories. Ground truth is separated from training inputs and used only for offline diagnostics. Source-validation and held-out target images do not enter feature preparation or training.
-
-The manifest generator currently supports PACS and creates a deterministic, hash-based training/validation split.
-
