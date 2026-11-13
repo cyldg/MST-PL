@@ -1,5 +1,8 @@
 # MST-PL
-This repository retains the FaST-PT implementation of "Multi-Modal Style Transfer-based Prompt Tuning for Efficient Federated Domain Generalization" and adds the DPL unsupervised runner described below.
+
+Code accompanying our journal manuscript, **Communication-Efficient Distributed Domain Generalization for Resource-Constrained Edge Devices via Unsupervised Prompt Learning**, submitted to **IEEE Transactions on Parallel and Distributed Systems (TPDS)**.
+
+The repository builds on FaST-PT and includes the DPL unsupervised extension described below.
 
 ## Environment
 Configure the environment according to environment.yml
