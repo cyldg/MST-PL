@@ -56,5 +56,5 @@ done
 
 Use new or empty output directories. Ground truth is separated from training inputs and used only for offline diagnostics. Source-validation and held-out target images do not enter feature preparation or training.
 
-The manifest generator currently supports PACS and creates a new hash-based split; reproducing the historical diagnostic requires its original frozen membership. The completed reconstruction diagnostic covers one PACS/Sketch task and training seed. Its source-cohort pseudo-label statistics do not establish reproduction of target accuracies across all benchmarks. See the protocol for reconstruction choices inherited from recovered source conventions.
+The manifest generator currently supports PACS and creates a deterministic, hash-based training/validation split.
 
