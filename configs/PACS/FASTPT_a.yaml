@@ -1,0 +1,47 @@
+EXP:
+  ADVICE_METHOD: "ClipMLP"
+  WANDB_SILENT: False
+  PROJ: "PACS_LADS_Replication"
+  SEED: 0
+  TEXT_PROMPTS: [ ["a cartoon drawing of a {}."],['a realistic photo of a {}.'],['a pencil drawing of a {}.']]
+  NEUTRAL_TEXT_PROMPTS: ["an artistic painting of a {}."]
+  AUGMENTATION: LADS
+  N_CTX_GLOBAL: 8
+  N_CTX_DOMAIN: 8
+  N_ROUNDS: 20
+  G_EPOCHS: 5
+  D_EPOCHS: 5
+  LR: 0.005
+  LR2: 0.01
+  LOGOUT: 'FASTPT_PACS_a'
+
+  
+DATA:
+  DATASET: "PACS"
+  LOAD_CACHED: True
+  BATCH_SIZE: 256
+  SAVE_PATH: 'PACS_embeddings'
+  TARGET: 'art_painting'
+
+METHOD:
+  MODEL:
+    NUM_LAYERS: 1
+    DOM_WEIGHT: 1.0
+    LR: 0.0001
+    CHECKPOINT: 'checkpoint/mlp_simple.pth'
+    CHECKPOINT_NAME: 'PACS-mlp-directional'
+    RESUME: False
+  USE_DOM_GT: True
+
+AUGMENTATION:
+  MODEL:
+    LR: 0.0001
+    WEIGHT_DECAY: 0.005
+    NUM_LAYERS: 1
+  EPOCHS: 50
+  GENERIC: False
+  ALPHA: 0.5
+  # DOM_LABELS: ['art_painting','cartoon','photo','sketch']
+  #prompts: [["an artistic painting of a {}."], ["a cartoon drawing of a {}."],['a realistic photo of a {}.'],['a pencil drawing of a {}.']]
+  DOM_LABELS: ['cartoon','photo','sketch']
+  INCLUDE_ORIG_TRAINING: False

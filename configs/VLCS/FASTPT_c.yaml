@@ -1,0 +1,47 @@
+EXP:
+  ADVICE_METHOD: "ClipMLP"
+  WANDB_SILENT: False
+  PROJ: "VLCS_LADS_Replication"
+  SEED: 0
+  TEXT_PROMPTS: [["an image from the LabelMe dataset showing a {}"],["a scene photo from the SUN09 dataset that contains a {}"],["a PASCAL VOC-style photo of a {}."]]
+  NEUTRAL_TEXT_PROMPTS: ["a clean object-centric image of a {} from Caltech101"]
+  AUGMENTATION: LADS
+  N_CTX_GLOBAL: 8
+  N_CTX_DOMAIN: 8
+  N_ROUNDS: 20
+  G_EPOCHS: 5
+  D_EPOCHS: 5
+  LR: 0.005
+  LR2: 0.01
+  LOGOUT: 'FASTPT_VLCS_c'
+  
+  
+DATA:
+  DATASET: "VLCS"
+  LOAD_CACHED: True
+  BATCH_SIZE: 256
+  SAVE_PATH: 'VLCS_embeddings'
+  TARGET: 'Caltech101'
+
+METHOD:
+  MODEL:
+    NUM_LAYERS: 1
+    DOM_WEIGHT: 1.0
+    LR: 0.0001
+    CHECKPOINT: 'checkpoint/mlp_simple.pth'
+    CHECKPOINT_NAME: 'VLCS-mlp-directional'
+    RESUME: False
+  USE_DOM_GT: True
+
+AUGMENTATION:
+  MODEL:
+    LR: 0.0001
+    WEIGHT_DECAY: 0.005
+    NUM_LAYERS: 1
+  EPOCHS: 50
+  GENERIC: False
+  ALPHA: 0.5
+  # DOM_LABELS: ['Caltech101','LabelMe','SUN09','VOC2007']
+  #prompts: [["a clean object-centric image of a {} from Caltech101"],["an image from the LabelMe dataset showing a {}"],["a scene photo from the SUN09 dataset that contains a {}"],["a PASCAL VOC-style photo of a {}."]]
+  DOM_LABELS: ['LabelMe','SUN09','VOC2007']
+  INCLUDE_ORIG_TRAINING: False

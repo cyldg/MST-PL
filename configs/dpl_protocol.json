@@ -1,0 +1,73 @@
+{
+  "protocol_id": "mstpl-dpl-unlabeled-paper-v1",
+  "supervision": "no_source_class_GT_in_training;GT_for_posthoc_diagnostics_only",
+  "backbone": "OpenAI CLIP ViT-L/14",
+  "clip_sha256": "b8cca3fd41ae0c99ba7e8951adf17d267cdb84cd88be6f7c2e0eca1737a03836",
+  "precision": "float32",
+  "prompt_tokens_each": 4,
+  "batch_size": 16,
+  "rounds": 20,
+  "global_epochs": 5,
+  "domain_epochs": 5,
+  "mst_epochs": 50,
+  "mst_epochs_source": "saved_source_convention_not_specified_by_manuscript",
+  "prompt_optimizer": {
+    "name": "SGD",
+    "lr": 0.005,
+    "momentum": 0,
+    "weight_decay": 0
+  },
+  "classifier_optimizer": {
+    "name": "SGD",
+    "lr": 0.01,
+    "momentum": 0,
+    "weight_decay": 0
+  },
+  "MST_optimizer": {
+    "name": "Adam",
+    "lr": 0.001,
+    "weight_decay": 0.05
+  },
+  "MST_MLP": [
+    768,
+    384,
+    768
+  ],
+  "MST_lambda": 0.5,
+  "alpha_UCE": 0.5,
+  "beta_CV": 0.5,
+  "alpha_beta_source": "recovered_read_un_and_FASTPT_un_defaults;not_specified_in_manuscript",
+  "thresholds": {
+    "initial": 0.9,
+    "purification": 0.88,
+    "expansion": 0.92
+  },
+  "purification": "relabel_existing_active_then_remove_low_confidence;inactive_not_admitted_at_low_threshold",
+  "expansion": "remaining_source_train_only;weak_confidence_ge_high_and_weak_strong_argmax_agree",
+  "CV": "literal_printed_composite_handcrafted_swapped_cross_entropy;PCweak_first_argument_gradient_retained",
+  "CV_pool": "all_source_training_samples;hard_pseudo_CE_only_active_subset",
+  "MST_consistency": "KL(P_transformed||P_original),using_local_domain_handcrafted_class_text;no_hard_GT_CE",
+  "domain_contrast": "coefficient1,temperature1,source_domain_caption_only",
+  "views": "one_fixed_weak_and_one_fixed_strong_image_view_per_sample;precompute_with_frozen_CLIP",
+  "view_normalization": {
+    "mean": [
+      0.5,
+      0.5,
+      0.5
+    ],
+    "std": [
+      0.5,
+      0.5,
+      0.5
+    ]
+  },
+  "variants": [
+    "full",
+    "initial_fixed",
+    "expansion_only"
+  ],
+  "selection": "fixed_final;no_target_or_diagnostic_GT_tuning",
+  "diagnostics": "post_training_only;every_round_states_and_full_cohort_probes",
+  "paper_fidelity_verified": false,
+  "results_written_to_manuscript": false
+}
